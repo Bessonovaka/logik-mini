@@ -69,6 +69,15 @@ class userController {
             next(e)
         }
     }
+
+    async getKvizs (req, res, next) {
+        try {
+            const kvizs = await userService.getAllKvizs();
+            return res.json(kvizs)
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 
 module.exports = new userController();

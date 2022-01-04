@@ -1,5 +1,5 @@
 .input {
-  padding: 16px 16px 16px 60px;
+  padding: 16px;
   font-size: 16px;
   font-weight: 400;
   display: block;
@@ -7,5 +7,7 @@
   background-color: hsla(0, 0%, 100%, 0.5);
   box-shadow: 0 3px 6px rgb(0, 0, 0 / 16%);
   border: none;
-  color: #fff;
+  color: #000;
+  outline: none;
+  width: 90%;
 }

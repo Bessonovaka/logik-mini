@@ -1,10 +1,21 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../images/logo.png";
-import "./header.scss";
+import logo from "../../static/images/logo.png";
 import Button from "../../ui/Button/Button";
+import "./header.scss";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/action-creators/user";
 
-const Header: FC = () => {
+interface Props {
+  isAuth: boolean;
+}
+
+const Header: FC<Props> = (props) => {
+  const dispatch = useDispatch();
+  const logoutProfile = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="header">
       <Link to="/" className="header__link header-logo">
@@ -23,12 +34,24 @@ const Header: FC = () => {
           </Link>
         </li>
         <li className="header__item">
-          <Link to="/" className="header__link">
+          <Link to="/signup" className="header__link">
             Регистрация
           </Link>
         </li>
         <li className="header__item">
-          <Button title="Войти" className="button button_white" />
+          {!props.isAuth ? (
+            <Link to="/login" className="button button_white">
+              Войти
+            </Link>
+          ) : (
+            <Button
+              title="Выйти"
+              className="button button_white"
+              submit={logoutProfile}
+            >
+              Выйти
+            </Button>
+          )}
         </li>
       </ul>
     </div>

@@ -6,11 +6,19 @@ interface IInputProps {
   name: string;
   value: string;
   type: string;
+  setFunction: Function;
 }
 
-const Input: FC<IInputProps> = ({ placeholder, name, value, type }) => {
+const Input: FC<IInputProps> = ({
+  placeholder,
+  name,
+  value,
+  type,
+  setFunction,
+}) => {
   return (
     <input
+      onChange={(e) => setFunction(e.target.value)}
       className="input"
       type={type}
       placeholder={placeholder}

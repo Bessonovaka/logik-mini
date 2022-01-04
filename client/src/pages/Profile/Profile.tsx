@@ -1,5 +1,5 @@
 import "./profile.scss";
-import avatar from "../../images/avatar.svg";
+import avatar from "../../static/images/avatar.svg";
 
 const Profile = () => {
   return (

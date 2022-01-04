@@ -1,4 +1,5 @@
 const UserModel = require('../models/user-model');
+const KvizModel = require('../models/kviz-model');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid'); 
 const mailService = require('./mail-service');
@@ -13,10 +14,10 @@ class UserService {
             throw ApiError.BadRequest("Пользователь с таким почтовым адресом уже существует")
         }            
         const hashPassword = bcrypt.hashSync(password, 7);
-        const activationLink = uuid.v4();
+        //const activationLink = uuid.v4();
 
         const user = await UserModel.create({email, password: hashPassword})
-        await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
+        //await mailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`);
         
         const userDto = new UserDto(user); // id, email, isActivated
         const tokens = tokenService.generateToken({...userDto})
@@ -85,6 +86,11 @@ class UserService {
     async getAllUsers() {
         const users = await UserModel.find();
         return users;
+    }
+
+    async getAllKvizs() {
+        const kvizs = await KvizModel.find();
+        return kvizs;
     }
 }
 
